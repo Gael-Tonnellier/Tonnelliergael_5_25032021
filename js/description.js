@@ -49,6 +49,7 @@ function addCart(camera){
         var cart = []; 
     } 
    let newProduct = {
+       id: camera._id,
        img: camera.imageUrl,
        name: camera.name,
        price: camera.price,
@@ -68,7 +69,7 @@ function addCart(camera){
     });
 }
 
-function productInCart(){
+  function productInCart(){
     let cartOnStorage = JSON.parse(localStorage.getItem('panier'));
     cartOnStorage.forEach((product)=>{
         let productCard = 
@@ -91,17 +92,20 @@ function productInCart(){
         </div>`;
         document.getElementById("panier").innerHTML += productCard;
         //console.log(product);
+        
         document.getElementById('product_'+ product.name).addEventListener('click',()=>{
-            cartOnStorage;
-            indexProduct= cartOnStorage.indexOf(product);
+            let indexProduct= cartOnStorage.indexOf(product);
             cartOnStorage.splice(indexProduct,1);
             localStorage.setItem('panier',JSON.stringify(cartOnStorage));
-            document.location.reload();
-            
-        })
-    })
-        
-        
+            document.location.reload();     
+        }) ;
+        let indexProduct= cartOnStorage.indexOf(product.name);
+        console.log(indexProduct);    
+    });
+       
     
 };
-productInCart();
+ productInCart();
+ export {productInCart};
+ 
+ 

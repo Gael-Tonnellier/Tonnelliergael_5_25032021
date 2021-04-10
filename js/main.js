@@ -41,3 +41,5 @@ function cameraShop(obj) {
         containerCard.appendChild(cameraCard);
     });
 }
+
+import {productInCart} from './description.js';
