@@ -25,115 +25,94 @@
         <div class="table-responsive-sm m-3 ">
             <table class="table table-striped table-dark table-bordered table-hover">
                 <thead>
-                  <tr>
-                    <th scope="col" class="col-2">Image</th>
-                    <th scope="col" class="col-7">Produit</th>
-                    <th scope="col"class="col-1">Quantité</th>
-                    <th scope="col"class="col-1">Prix</th>
-                    <th scope="col"class="col-1"><i class="fas fa-trash-alt"></i></th>
-                  </tr>
+                    <tr>
+                        <th scope="col" class="col-2">Image</th>
+                        <th scope="col" class="col-7">Produit</th>
+                        <th scope="col" class="col-1">Quantité</th>
+                        <th scope="col" class="col-1">Prix</th>
+                        <th scope="col" class="col-1"><i class="fas fa-trash-alt"></i></th>
+                    </tr>
                 </thead>
                 <tbody id="table-body">
-                  
+
                 </tbody>
-              </table>
+            </table>
         </div>
         <div class="row m-3">
             <p class=" col-2 text-white bg-dark rounded" id="prix-total"></p>
         </div>
     </section>
     <section class="container">
-        <form class="row g-3 needs-validation bg-dark text-white rounded p-2 mb-2" novalidate>
+        <form class="row g-3 needs-validation bg-dark text-white rounded p-2 mb-5" novalidate>
             <div class="col-md-4">
-              <label for="validationCustom01" class="form-label fs-4">Nom </br><span class="text-warning fs-6">Symbole ($,?,/...) et chiffres interdit</span></label>
-              <input type="text" pattern="^[a-z ,.'-]{2,}$" class="form-control" id="validationCustom01" required>
-              <div class="valid-feedback">
-                Looks good!
-              </div>
-              <div class="invalid-feedback">
-                Please choose a username.
-              </div>
-            </div>
-            <div class="col-md-4">
-              <label for="validationCustom02" class="form-label fs-4">Prénom </br><span class="text-warning fs-6">Symbole ($,?,/...) et chiffres interdit</span></label>
-              <input type="text" pattern="^[a-z ,.'-]{2,}$" class="form-control" id="validationCustom02" required>
-              <div class="valid-feedback">
-                Looks good!
-              </div>
-              <div class="invalid-feedback">
-                Please choose a username.
-              </div>
-            </div>
-            <div class="col-md-4">
-              <label for="validationCustomUsername" class="form-label">Username</label>
-              <div class="input-group has-validation">
-                <span class="input-group-text" id="inputGroupPrepend">@</span>
-                <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                <label for="validationCustom01" class="form-label fs-4">Nom </br><span class="text-warning fs-6">Symbole
+                        ($,?,/...) et chiffres interdit</span></label>
+                <input type="text" id="first-name" placeholder="Barker" pattern="^[a-zA-Zéëàû ,.'-]{2,}$" class="form-control"
+                    id="validationCustom01" required>
+                <div class="valid-feedback">
+                    Parfait !
+                </div>
                 <div class="invalid-feedback">
-                  Please choose a username.
+                    Merci de renseigner un nom valide.
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="validationCustom02" class="form-label fs-4">Prénom </br><span
+                        class="text-warning fs-6">Symbole ($,?,/...) et chiffres interdit</span></label>
+                <input type="text" id="second-name" placeholder="Travis" pattern="^[a-zA-Zéëàû ,.'-]{2,}$" class="form-control"
+                    id="validationCustom02" required>
+                <div class="valid-feedback">
+                    Parfait !
+                </div>
+                <div class="invalid-feedback">
+                    Merci de renseigner un prénom valide.
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="validationCustomUsername" class="form-label fs-4">Adresse Mail </br><span
+                    class="text-warning fs-6">Symbole ($,?,/...) et chiffres interdit</span></label>
+                <input type="email" id="mail" placeholder="travis.barker@prodrum.com" pattern="\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b"
+                    class="form-control" id="validationCustom03" required>
+                <div class="invalid-feedback">
+                    Merci de renseigner une adresse mail valide.
                 </div>
                 <div class="valid-feedback">
-                    Looks good!
-                  </div>
-              </div>
+                    Parfait !
+                </div>
+            </div>
             </div>
             <div class="col-md-6">
-              <label for="validationCustom03" class="form-label">City</label>
-              <input type="text" class="form-control" id="validationCustom03" required>
-              <div class="invalid-feedback">
-                Please provide a valid city.
-              </div>
-              <div class="valid-feedback">
-                Looks good!
-              </div>
-            </div>
-            <div class="col-md-3">
-              <label for="validationCustom04" class="form-label">State</label>
-              <select class="form-select" id="validationCustom04" required>
-                <option selected disabled value="">Choose...</option>
-                <option>...</option>
-              </select>
-              <div class="invalid-feedback">
-                Please select a valid state.
-              </div>
-              <div class="valid-feedback">
-                Looks good!
-              </div>
-            </div>
-            <div class="col-md-3">
-              <label for="validationCustom05" class="form-label">Zip</label>
-              <input type="text" class="form-control" id="validationCustom05" required>
-              <div class="invalid-feedback">
-                Please provide a valid zip.
-              </div>
-              <div class="valid-feedback">
-                Looks good!
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                <label class="form-check-label" for="invalidCheck">
-                  Agree to terms and conditions
-                </label>
+                <label for="validationCustom03" class="form-label fs-4">Adresse Domicile</br><span
+                    class="text-warning fs-6">Symbole ($,?,/...)</span></label>
+                <input type="text" id="adress" placeholder="Quelques part en Californie" class="form-control" pattern="^[0-9a-zA-Zéëàû ,.'-]{2,}$" id="validationCustom04" required>
                 <div class="invalid-feedback">
-                  You must agree before submitting.
+                    Merci de renseigner une adresse valide.
                 </div>
                 <div class="valid-feedback">
-                    Looks good!
-                  </div>
-              </div>
+                    Parfait !
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label for="validationCustom05" class="form-label fs-4">Ville </br><span
+                    class="text-warning fs-6">Symbole ($,?,/...) et chiffres interdit</span></label>
+                <input type="text" id="city" class="form-control" placeholder="Fontana" pattern= "[a-zA-Zéëàû ,.'-]{2,}$" id="validationCustom06" required>
+                <div class="invalid-feedback">
+                    Merci de renseigner une ville valide.
+                </div>
+                <div class="valid-feedback">
+                    Parfait !
+                </div>
             </div>
             <div class="col-12">
-              <button class="btn btn-primary" type="submit">Submit form</button>
+                <button class="btn btn-light" id="submit" type="submit">Passer la commande</button>
             </div>
-          </form>
+        </form>
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"></script>
-    <script  src="js/panier.js"></script>
+    <script src="js/panier.js"></script>
 </body>
 
 </html>
