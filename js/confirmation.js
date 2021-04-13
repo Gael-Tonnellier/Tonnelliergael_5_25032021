@@ -9,10 +9,15 @@ let orderId = commandInfo.orderId;
 let firstName= commandInfo.contact.firstName;
 //console.log(firstName);
 
-let confirmation = `<h5 class="card-title">Merci pour ton achat ${firstName} ! </h5>
+let confirmation = `<h2 class="card-title">Merci pour ton achat ${firstName} ! </h2>
 <p class="card-text">Votre commande <strong>${orderId}</strong>
    d'un montant de <strong>${totalPrice} €</strong> a été traité.
     Un mail contenant la facture vous a été envoyé par mail.  </p>
-<a href="index.html" class="btn btn-dark">Retourner à l'accueil !</a>
+<a href="index.html" class="btn btn-dark" id="btn-back">Retourner à l'accueil !</a>
 `;
 document.getElementById('card-body').innerHTML = confirmation;
+
+let buttonBack= document.getElementById('btn-back');
+buttonBack.addEventListener("click",function(){
+    localStorage.clear();
+})
