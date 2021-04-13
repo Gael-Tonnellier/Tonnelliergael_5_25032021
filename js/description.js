@@ -100,12 +100,12 @@ function addCart(camera){
             document.location.reload();     
         }) ;
         let indexProduct= cartOnStorage.indexOf(product.name);
-        console.log(indexProduct);    
+        //console.log(indexProduct);    
     });
        
     
 };
  productInCart();
- export {productInCart};
+ //export {productInCart};
  
  

@@ -42,4 +42,4 @@ function cameraShop(obj) {
     });
 }
 
-import {productInCart} from './description.js';
+//import {productInCart} from './description.js';

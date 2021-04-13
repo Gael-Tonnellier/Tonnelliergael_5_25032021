@@ -3,7 +3,11 @@ let allPrices = [];
 let products = [];
 cartOnStorage.forEach((product) => {
   allPrices.push((product.totalProduct * product.price) / 100);
-  products.push(product.id);
+  let productNumber= product.totalProduct;
+  for(let i=0; i<productNumber;i++){
+    products.push(product.id);
+  }
+  
   let productCard = `<tr>
             <td class="align-middle"><img class="rounded border" src="${
               product.img
@@ -30,14 +34,10 @@ cartOnStorage.forEach((product) => {
     });
 });
 
-//console.log(products);
+console.log(products);
 
 let totalPrice = allPrices.reduce((a, b) => a + b, 0);
 document.getElementById("prix-total").innerHTML ="Prix total : " + totalPrice + " €";
-
-
-
-
 
 let forms = document.querySelectorAll(".needs-validation");
 Array.prototype.slice.call(forms).forEach(function (form) {
@@ -62,10 +62,14 @@ Array.prototype.slice.call(forms).forEach(function (form) {
         request.open("POST", "http://localhost:3000/api/cameras/order",true);
         request.setRequestHeader("Content-Type", "application/json");
         request.send(JSON.stringify({contact,products}));
-        request.onreadystatechange = function() {         
-            const response = JSON.parse(this.responseText);
-            console.log(response);
+        request.onreadystatechange = function() {  
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 201){
+              const response = this.responseText;
+              console.log(response);
+              localStorage.setItem('recap',response);
+            }        
           };
+          window.location.pathname = ('./confirmation.html');
       }
       event.preventDefault();
       form.classList.add("was-validated");
