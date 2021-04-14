@@ -87,7 +87,7 @@ function cameraShop(obj) {
 let cartOnStorage = JSON.parse(localStorage.getItem("panier"));
 
   cartOnStorage.forEach((product) => {
-    let productCard = `<div class="card mb-3" style="max-width: 540px;">
+    let productCard = `<div class="card mb-3" id="${product}" style="max-width: 540px;">
             <div class="row g-0">
                 <div class="col-4 align-self-center">
                     <img class="rounded border" src="${product.img}"  alt="${
@@ -117,5 +117,5 @@ function deleteProduct(product){
     let indexProduct = cartOnStorage.findIndex(elem=>elem.id==product);
     cartOnStorage.splice(indexProduct, 1);
     localStorage.setItem("panier", JSON.stringify(cartOnStorage));
-    document.location.reload();
+    document.getElementById(product).remove();
   };

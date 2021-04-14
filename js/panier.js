@@ -8,7 +8,7 @@ cartOnStorage.forEach((product) => {
     products.push(product.id);
   }
   
-  let productCard = `<tr>
+  let productCard = `<tr id="${product.id}">
             <td class="align-middle"><img class="rounded border" src="${
               product.img
             }"  alt="${product.name}" style="max-width:100%"></td>
@@ -26,7 +26,7 @@ cartOnStorage.forEach((product) => {
   let indexProduct = cartOnStorage.findIndex(elem=>elem.id==product);
   cartOnStorage.splice(indexProduct, 1);
   localStorage.setItem("panier", JSON.stringify(cartOnStorage));
-  document.location.reload();
+  document.getElementById(product).remove();
 };
 
 
@@ -72,9 +72,4 @@ Array.prototype.slice.call(forms).forEach(function(form) {
     false
   );
 });
-//async function whenFormValidate(){
-//  await validationForm(form);
-  
-//}
-//whenFormValidate(form);
 
