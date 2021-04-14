@@ -34,7 +34,7 @@ let totalPrice = allPrices.reduce((a, b) => a + b, 0);
 document.getElementById("prix-total").innerHTML ="Prix total : " + totalPrice + " €";
 
 let forms = document.querySelectorAll(".needs-validation");
-Array.prototype.slice.call(forms).forEach(function (form) {
+Array.prototype.slice.call(forms).forEach(function(form) {
   form.addEventListener(
     "submit",
     function (event) {
@@ -61,9 +61,10 @@ Array.prototype.slice.call(forms).forEach(function (form) {
               const response = this.responseText;
               console.log(response);
               localStorage.setItem('recap',response);
+              window.location.pathname = ('./confirmation.html');
             }        
           };
-          window.location.pathname = ('./confirmation.html');
+          
       }
       event.preventDefault();
       form.classList.add("was-validated");
@@ -71,3 +72,9 @@ Array.prototype.slice.call(forms).forEach(function (form) {
     false
   );
 });
+//async function whenFormValidate(){
+//  await validationForm(form);
+  
+//}
+//whenFormValidate(form);
+

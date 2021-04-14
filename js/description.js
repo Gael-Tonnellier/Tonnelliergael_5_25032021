@@ -75,7 +75,7 @@ function addCart(camera) {
   });
 }
 let cartOnStorage = JSON.parse(localStorage.getItem("panier"));
-
+function productIsInCart(){
   cartOnStorage.forEach((product) => {
     let productCard = `<div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
@@ -102,7 +102,8 @@ let cartOnStorage = JSON.parse(localStorage.getItem("panier"));
         </div>`;
     document.getElementById("panier").innerHTML += productCard;
   });
-
+};
+productIsInCart();
 function deleteProduct(product){
     let indexProduct = cartOnStorage.findIndex(elem=>elem.id==product);
     cartOnStorage.splice(indexProduct, 1);

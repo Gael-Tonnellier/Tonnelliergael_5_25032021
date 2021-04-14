@@ -6,11 +6,54 @@ requestXHR.onreadystatechange = function() {
         //console.log(request[0].price);
         /* Import des fonctions */
         cameraShop(request);
-        
+        canvas(request)
     }
 };
 requestXHR.open("GET", "http://localhost:3000/api/cameras/");
 requestXHR.send();
+
+function canvas(camera){
+  camera.sort(function (a,b){
+    return a.price - b.price;
+  });
+  console.log(camera)
+  console.log(camera[Math.floor(camera.length/2)])
+  
+  /* Produit le moins chère. */
+  let cheaperProduct = `<div class="carousel-item active">
+    <img src="${camera[0].imageUrl}" class="d-block w-100" alt="${camera[0].name}">
+      <div class="carousel-caption d-block d-md-block  bg-white  rounded border border-dark">
+        <h5>Pour les débutants !</h5>
+        <p>${camera[0].name}</p>
+        <a class="link-dark" href="description.html?id=${camera[0]._id}"> En savoir plus </a>
+    </div>
+  </div>`;
+  document.getElementById('carousel').innerHTML += cheaperProduct;
+
+  /* Produit le plus chère. */
+  let expensiveProduct = `<div class="carousel-item">
+  <img src="${camera[camera.length-1].imageUrl}" class="d-block w-100" alt="${camera[camera.length-1].name}">
+  <div class="carousel-caption d-block d-md-block bg-white rounded border border-dark">
+      <h5>Pour les pros !</h5>
+      <p>${camera[camera.length-1].name}</p>
+      <a class="link-dark" href="description.html?id=${camera[camera.length-1]._id}"> En savoir plus </a>
+  </div>
+  </div>`;
+  document.getElementById('carousel').innerHTML += expensiveProduct;
+
+  /* Produit meilleur offre */
+  let offerProduct = `<div class="carousel-item">
+  <img src="${camera[Math.floor(camera.length/2)].imageUrl}" class="d-block w-100" alt="${camera[Math.floor(camera.length/2)].name}">
+  <div class="carousel-caption d-block d-md-block bg-white rounded border border-dark">
+      <h5>Pour les pros !</h5>
+      <p>${camera[Math.floor(camera.length/2)].name}</p>
+      <a class="link-dark" href="description.html?id=${camera[Math.floor(camera.length/2)]._id}"> En savoir plus </a>
+  </div>
+  </div>`;
+  document.getElementById('carousel').innerHTML += offerProduct;
+
+
+}
 
 /* Market */
   
