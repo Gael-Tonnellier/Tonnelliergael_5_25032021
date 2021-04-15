@@ -1,8 +1,7 @@
 // APPEL API D'UNE SEULE CAMERA
 
-function cameraRequest(){
-// RECUPERATION DE L'ID PRODUIT VIA URL
-let id = document.location.search.substring(4);
+/* function cameraRequest(){
+
 
 //REQUETE XHR
 let requestXHR = new XMLHttpRequest();
@@ -20,7 +19,23 @@ requestXHR.onreadystatechange = function () {
 requestXHR.open("GET", "http://localhost:3000/api/cameras/" + id);
 requestXHR.send();
 }
-cameraRequest();
+cameraRequest(); */
+
+// REQUETE FETCH
+function requestFetch() {
+
+  // RECUPERATION DE L'ID PRODUIT VIA URL
+  let id = document.location.search.substring(4);
+
+  let request = fetch("http://localhost:3000/api/cameras/"+ id)
+    .then((response) => response.json())
+    .then((camera) => {
+      cameraProduct(camera);
+      addCart(camera);
+    })
+    .catch(() => console.log("erreur d'API"));
+}
+requestFetch();
 
 // CREATION PAGE DE LA CAMERA
 function cameraProduct(camera) {

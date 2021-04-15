@@ -41,7 +41,6 @@ function deleteProduct(product) {
   cartOnStorage.splice(indexProduct, 1);
   localStorage.setItem("panier", JSON.stringify(cartOnStorage));
   document.getElementById(product).remove();
-  
 }
 
 // FONCTIONNALITE QUI PERMET D'AFFICHER LE PRIX TOTAL
@@ -65,7 +64,7 @@ function sendForm() {
           event.stopPropagation();
         } else {
           event.preventDefault();
-          
+
           //RECUPERATION DES INFOS CLIENT A ENVOYER
           let contact = {
             firstName: document.getElementById("first-name").value,
@@ -74,9 +73,9 @@ function sendForm() {
             city: document.getElementById("first-name").value,
             email: document.getElementById("mail").value,
           };
-          
+
           //REQUETE XHR POUR ENVOYER CONTACT ET PRODUCT
-          let request = new XMLHttpRequest();
+          /* let request = new XMLHttpRequest();
           request.open("POST", "http://localhost:3000/api/cameras/order", true);
           request.setRequestHeader("Content-Type", "application/json");
           request.send(JSON.stringify({ contact, products }));
@@ -90,7 +89,23 @@ function sendForm() {
               localStorage.setItem("recap", response);
               window.location.pathname = "./confirmation.html";
             }
-          };
+          }; */
+
+          //REQUETE FETCH POUR ENVOYER CONTACT ET PRODUCT
+          let request = fetch("http://localhost:3000/api/cameras/order",{
+            method: 'POST',
+            headers:{
+              'Content-Type':'application/json'
+            },
+            body: JSON.stringify({contact, products})
+          })
+            .then((response) => response.json())
+            .then((order) => {
+              console.log(order);
+              (localStorage.setItem("recap", JSON.stringify(order)));
+              window.location.pathname = "./confirmation.html";
+            })
+            .catch(() => console.log("erreur d'API"));
         }
         event.preventDefault();
         form.classList.add("was-validated");

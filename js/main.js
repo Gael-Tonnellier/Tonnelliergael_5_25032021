@@ -1,6 +1,6 @@
 // APPEL API POUR TOUTES LES CAMERAS
 
-function camerasRequest() {
+/* function camerasRequest() {
 
   //REQUETE XHR
   let requestXHR = new XMLHttpRequest();
@@ -17,17 +17,28 @@ function camerasRequest() {
   requestXHR.open("GET", "http://localhost:3000/api/cameras/");
   requestXHR.send();
 }
-camerasRequest();
+camerasRequest(); */
 
-// CAROUSEL DES CAMERAS MIS EN AVANT 
+// REQUETE FETCH
+function requestFetch() {
+  let request = fetch("http://localhost:3000/api/cameras/")
+    .then((response) => response.json())
+    .then((cameras) => {
+      cameraShop(cameras);
+      carousel(cameras);
+    })
+    .catch(() => console.log("erreur d'API"));
+}
+requestFetch();
+
+// CAROUSEL DES CAMERAS MIS EN AVANT
 
 function carousel(camera) {
-
   // ORGANISATION DU TABLEAU DU PRIX LE MOINS ELEVE AU PLUS ELEVE
 
   camera.sort((a, b) => a.price - b.price);
 
-  // PREMIER PRODUIT DU TABLEAU 
+  // PREMIER PRODUIT DU TABLEAU
   let cheaperProduct = `<div class="carousel-item active">
     <img src="${camera[0].imageUrl}" class="d-block w-100" alt="${camera[0].name}">
       <div class="carousel-caption d-block d-md-block  bg-white  rounded border border-dark">
@@ -53,7 +64,7 @@ function carousel(camera) {
   </div>`;
   document.getElementById("carousel").innerHTML += expensiveProduct;
 
-  // PRODUIT MILIEU DE TABLEAU 
+  // PRODUIT MILIEU DE TABLEAU
   let offerProduct = `<div class="carousel-item">
   <img src="${
     camera[Math.floor(camera.length / 2)].imageUrl
@@ -69,7 +80,7 @@ function carousel(camera) {
   document.getElementById("carousel").innerHTML += offerProduct;
 }
 
-// CREATION DES CARDS  
+// CREATION DES CARDS
 
 function cameraShop(obj) {
   obj.forEach((cameras) => {
@@ -90,13 +101,12 @@ function cameraShop(obj) {
           </div>
           </div>`;
 
-    
     let cameraCard = document.createElement("div");
     cameraCard.className = "col-md-4 mb-3 mt-3";
     cameraCard.innerHTML = camerasContent;
-    
+
     let containerCard = document.getElementById("container-card");
-    
+
     containerCard.appendChild(cameraCard);
   });
 }
@@ -104,7 +114,7 @@ function cameraShop(obj) {
 // RECUPERATION DU PANIER EN LOCALSTORAGE
 let cartOnStorage = JSON.parse(localStorage.getItem("panier"));
 
-// CREATION CARD EN PANIER 
+// CREATION CARD EN PANIER
 
 cartOnStorage.forEach((product) => {
   let productCard = `<div class="card mb-3" id="${product}" style="max-width: 540px;">
