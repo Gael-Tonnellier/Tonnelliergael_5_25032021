@@ -4,7 +4,7 @@
 
 
 //REQUETE XHR
-let requestXHR = new XMLHttpRequest();
+const requestXHR = new XMLHttpRequest();
 requestXHR.onreadystatechange = function () {
   if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
     const request = JSON.parse(this.responseText);
@@ -23,11 +23,10 @@ cameraRequest(); */
 
 // REQUETE FETCH
 function requestFetch() {
-
   // RECUPERATION DE L'ID PRODUIT VIA URL
-  let id = document.location.search.substring(4);
+  const id = document.location.search.substring(4);
 
-  let request = fetch("http://localhost:3000/api/cameras/"+ id)
+  const request = fetch("http://localhost:3000/api/cameras/" + id)
     .then((response) => response.json())
     .then((camera) => {
       cameraProduct(camera);
@@ -40,7 +39,7 @@ requestFetch();
 // CREATION PAGE DE LA CAMERA
 function cameraProduct(camera) {
   document.querySelector("title").innerText = `Fiche Produit : ${camera.name}`;
-  let cameraContent = `<div class="row justify-content-around mb-5" style="background-color:gray">
+  const cameraContent = `<div class="row justify-content-around mb-5" style="background-color:gray">
             <div class="col-lg-6 col-sm-10 py-5" >
             <img src="${
               camera.imageUrl
@@ -65,23 +64,21 @@ function cameraProduct(camera) {
         </div>`;
   document.getElementById("container-product").innerHTML = cameraContent;
 
-  // AJOUT DES VARIABLES PRODUIT          
+  // AJOUT DES VARIABLES PRODUIT
   camera.lenses.forEach((lense) => {
-    let optionLense = `<option value="${lense}"> ${lense}</option>`;
-    let form = document.getElementById("formulary");
+    const optionLense = `<option value="${lense}"> ${lense}</option>`;
+    const form = document.getElementById("formulary");
     form.innerHTML += optionLense;
   });
 }
 
 // FONCTIONALITE AJOUT AU PANIER
 function addCart(camera) {
-
   // CHECK SI UN PANIER EXISTE DEJA
-  if (JSON.parse(localStorage.getItem("panier"))) {
-    var cart = JSON.parse(localStorage.getItem("panier"));
-  } else {
-    var cart = [];
-  }
+  const cart = JSON.parse(localStorage.getItem("panier"))
+    ? JSON.parse(localStorage.getItem("panier"))
+    : [];
+
   let newProduct = {
     id: camera._id,
     img: camera.imageUrl,
@@ -90,9 +87,9 @@ function addCart(camera) {
     totalProduct: 1,
   };
 
-  //AJOUT PRODUIT AU PANIER - INCREMENTE SI DEJA EN PANIER 
+  //AJOUT PRODUIT AU PANIER - INCREMENTE SI DEJA EN PANIER
   document.getElementById("add-button").addEventListener("click", () => {
-    let productIsInCart = cart.findIndex(
+    const productIsInCart = cart.findIndex(
       (product) => product.name == newProduct.name
     );
     if (productIsInCart != -1) {
@@ -105,18 +102,22 @@ function addCart(camera) {
     document.location.reload();
   });
 }
-// RECUPERATION DU PANIER EN LOCALSTORAGE
-let cartOnStorage = JSON.parse(localStorage.getItem("panier"));
 
-// CREATION CARD EN PANIER 
+ function cardProductInCart() {
+  // RECUPERATION DU PANIER EN LOCALSTORAGE
+  const cartOnStorage = JSON.parse(localStorage.getItem("panier"));
 
-cartOnStorage.forEach((product) => {
-  let productCard = `<div class="card mb-3" id="${product}" style="max-width: 540px;">
+  // CREATION CARD EN PANIER
+
+  cartOnStorage.forEach((product) => {
+    const productCard = `<div class="card mb-3" id="${
+      product.id
+    }" style="max-width: 540px;">
             <div class="row g-0">
                 <div class="col-4 align-self-center">
                     <img class="rounded border" src="${product.img}"  alt="${
-    product.name
-  }" style="max-width:100%">
+      product.name
+    }" style="max-width:100%">
                 </div>
                 <div class="col-6">
                     <div class="card-body">
@@ -136,16 +137,17 @@ cartOnStorage.forEach((product) => {
                 </div>
             </div>
         </div>`;
-  document.getElementById("panier").innerHTML += productCard;
-});
+    document.getElementById("panier").innerHTML += productCard;
+  });
+}
+cardProductInCart();
 
 //SUPRESSION CARD EN PANIER HTML + LOCALSTORAGE
 
 function deleteProduct(product) {
-  let indexProduct = cartOnStorage.findIndex((elem) => elem.id == product);
+  const cartOnStorage = JSON.parse(localStorage.getItem("panier"));
+  const indexProduct = cartOnStorage.findIndex((elem) => elem.id == product);
   cartOnStorage.splice(indexProduct, 1);
   localStorage.setItem("panier", JSON.stringify(cartOnStorage));
   document.getElementById(product).remove();
 }
-
-

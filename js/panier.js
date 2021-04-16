@@ -1,9 +1,9 @@
 // RECUPERATION DU PANIER EN LOCALSTORAGE
-let cartOnStorage = JSON.parse(localStorage.getItem("panier"));
+const cartOnStorage = JSON.parse(localStorage.getItem("panier"));
 
 // CREATION TABLEAU VIDE QUI SERVIRONT AU POST API ET PRIX TOTAL
-let allPrices = [];
-let products = [];
+const allPrices = [];
+const products = [];
 
 // FONCTIONNALITE QUI PERMET DE CREE LES PRODUITS DANS LE TABLEAU
 function recapProduct() {
@@ -12,12 +12,12 @@ function recapProduct() {
     allPrices.push((product.totalProduct * product.price) / 100);
 
     //PUSH ID PRODUIT POUR CHAQUE NOMBRE DE PRODUIT
-    let productNumber = product.totalProduct;
+    const productNumber = product.totalProduct;
     for (let i = 0; i < productNumber; i++) {
       products.push(product.id);
     }
 
-    let productCard = `<tr id="${product.id}">
+    const productCard = `<tr id="${product.id}">
               <td class="align-middle"><img class="rounded border" src="${
                 product.img
               }"  alt="${product.name}" style="max-width:100%"></td>
@@ -37,7 +37,7 @@ recapProduct();
 
 //SUPRESSION CARD EN PANIER HTML + LOCALSTORAGE
 function deleteProduct(product) {
-  let indexProduct = cartOnStorage.findIndex((elem) => elem.id == product);
+  const indexProduct = cartOnStorage.findIndex((elem) => elem.id == product);
   cartOnStorage.splice(indexProduct, 1);
   localStorage.setItem("panier", JSON.stringify(cartOnStorage));
   document.getElementById(product).remove();
@@ -46,7 +46,7 @@ function deleteProduct(product) {
 // FONCTIONNALITE QUI PERMET D'AFFICHER LE PRIX TOTAL
 function totalPrices() {
   // REDUCTION DU TABLEAU ALLPRICES (ADDITION)
-  let totalPrice = allPrices.reduce((a, b) => a + b, 0);
+  const totalPrice = allPrices.reduce((a, b) => a + b, 0);
   document.getElementById("prix-total").innerHTML =
     "Prix total : " + totalPrice + " €";
 }
@@ -54,7 +54,7 @@ totalPrices();
 
 //FONCTIONNALITE QUI PERMET D'ENVOYER LE FORMULAIRE SI REMPLIS AVEC UN POST
 function sendForm() {
-  let forms = document.querySelectorAll(".needs-validation");
+  const forms = document.querySelectorAll(".needs-validation");
   Array.prototype.slice.call(forms).forEach(function (form) {
     form.addEventListener(
       "submit",
@@ -66,7 +66,7 @@ function sendForm() {
           event.preventDefault();
 
           //RECUPERATION DES INFOS CLIENT A ENVOYER
-          let contact = {
+          const contact = {
             firstName: document.getElementById("first-name").value,
             lastName: document.getElementById("second-name").value,
             address: document.getElementById("first-name").value,
@@ -92,7 +92,7 @@ function sendForm() {
           }; */
 
           //REQUETE FETCH POUR ENVOYER CONTACT ET PRODUCT
-          let request = fetch("http://localhost:3000/api/cameras/order",{
+          const request = fetch("http://localhost:3000/api/cameras/order",{
             method: 'POST',
             headers:{
               'Content-Type':'application/json'

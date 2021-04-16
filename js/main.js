@@ -3,7 +3,7 @@
 /* function camerasRequest() {
 
   //REQUETE XHR
-  let requestXHR = new XMLHttpRequest();
+  const requestXHR = new XMLHttpRequest();
   requestXHR.onreadystatechange = function () {
     if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
       const request = JSON.parse(this.responseText);
@@ -39,7 +39,7 @@ function carousel(camera) {
   camera.sort((a, b) => a.price - b.price);
 
   // PREMIER PRODUIT DU TABLEAU
-  let cheaperProduct = `<div class="carousel-item active">
+  const cheaperProduct = `<div class="carousel-item active">
     <img src="${camera[0].imageUrl}" class="d-block w-100" alt="${camera[0].name}">
       <div class="carousel-caption d-block d-md-block  bg-white  rounded border border-dark">
         <h5>Pour les débutants !</h5>
@@ -50,7 +50,7 @@ function carousel(camera) {
   document.getElementById("carousel").innerHTML += cheaperProduct;
 
   // DERNIER PRODUIT DU TABLEAU
-  let expensiveProduct = `<div class="carousel-item">
+  const expensiveProduct = `<div class="carousel-item">
   <img src="${camera[camera.length - 1].imageUrl}" class="d-block w-100" alt="${
     camera[camera.length - 1].name
   }">
@@ -65,7 +65,7 @@ function carousel(camera) {
   document.getElementById("carousel").innerHTML += expensiveProduct;
 
   // PRODUIT MILIEU DE TABLEAU
-  let offerProduct = `<div class="carousel-item">
+  const offerProduct = `<div class="carousel-item">
   <img src="${
     camera[Math.floor(camera.length / 2)].imageUrl
   }" class="d-block w-100" alt="${camera[Math.floor(camera.length / 2)].name}">
@@ -84,7 +84,7 @@ function carousel(camera) {
 
 function cameraShop(obj) {
   obj.forEach((cameras) => {
-    let camerasContent = `<div class="card">
+    const camerasContent = `<div class="card">
           <img src="${cameras.imageUrl}" class="card-img-top"alt= "Appareil ${
       cameras.name
     }">
@@ -101,28 +101,30 @@ function cameraShop(obj) {
           </div>
           </div>`;
 
-    let cameraCard = document.createElement("div");
+    const cameraCard = document.createElement("div");
     cameraCard.className = "col-md-4 mb-3 mt-3";
     cameraCard.innerHTML = camerasContent;
 
-    let containerCard = document.getElementById("container-card");
+    const containerCard = document.getElementById("container-card");
 
     containerCard.appendChild(cameraCard);
   });
 }
+function cardProductInCart() {
+  // RECUPERATION DU PANIER EN LOCALSTORAGE
+  const cartOnStorage = JSON.parse(localStorage.getItem("panier"));
 
-// RECUPERATION DU PANIER EN LOCALSTORAGE
-let cartOnStorage = JSON.parse(localStorage.getItem("panier"));
+  // CREATION CARD EN PANIER
 
-// CREATION CARD EN PANIER
-
-cartOnStorage.forEach((product) => {
-  let productCard = `<div class="card mb-3" id="${product}" style="max-width: 540px;">
+  cartOnStorage.forEach((product) => {
+    const productCard = `<div class="card mb-3" id="${
+      product.id
+    }" style="max-width: 540px;">
             <div class="row g-0">
                 <div class="col-4 align-self-center">
                     <img class="rounded border" src="${product.img}"  alt="${
-    product.name
-  }" style="max-width:100%">
+      product.name
+    }" style="max-width:100%">
                 </div>
                 <div class="col-6">
                     <div class="card-body">
@@ -142,14 +144,19 @@ cartOnStorage.forEach((product) => {
                 </div>
             </div>
         </div>`;
-  document.getElementById("panier").innerHTML += productCard;
-});
+    document.getElementById("panier").innerHTML += productCard;
+  });
+}
+cardProductInCart();
 
 //SUPRESSION CARD EN PANIER HTML + LOCALSTORAGE
 
 function deleteProduct(product) {
-  let indexProduct = cartOnStorage.findIndex((elem) => elem.id == product);
+  const cartOnStorage = JSON.parse(localStorage.getItem("panier"));
+  const indexProduct = cartOnStorage.findIndex((elem) => elem.id == product);
   cartOnStorage.splice(indexProduct, 1);
   localStorage.setItem("panier", JSON.stringify(cartOnStorage));
   document.getElementById(product).remove();
 }
+
+
