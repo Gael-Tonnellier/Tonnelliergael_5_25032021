@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <header id="home">
+    <header id="home" class="sticky-top">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.html"><i class="fas fa-camera-retro"></i> Orinocam</a>
@@ -25,12 +25,12 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-link mx-2 active" aria-current="page" href="index.html#shop">Magasin</a>
-                        <a class="nav-link mx-2 " href="#discount">Bons plans</a>
-                        <a class="nav-link mx-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
-                            aria-controls="offcanvasWithBothOptions">Panier</a>
-                        <a class="nav-link mx-2" href="#contact">A propos</a>
+                    <div class="navbar-nav ">
+                        <a class="nav-link mx-2 text-light" aria-current="page" href="index.html#shop">Magasin</a>
+                        <a class="nav-link mx-2 text-light" href="#discount">Bons plans</a>
+                        <a class="nav-link mx-2 text-light" id="cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+                            aria-controls="offcanvasWithBothOptions">Panier <span class="bg-light text-dark p-1 rounded" id="cartCount"></span></a>
+                        <a class="nav-link mx-2 text-light" href="#contact">A propos</a>
                     </div>
                 </div>
             </div>
@@ -100,7 +100,7 @@
             </div>
         </article>
     </section>
-    <footer class="container-fluid bg-dark mt-auto text-light">
+    <footer class="container-fluid bg-dark mt-auto text-light" id="contact">
         <div class="row pt-2 justify-content-around">
           <div class="col-12 col-sm-3">
             <h3>A propos</h3>

@@ -1,5 +1,6 @@
 import {deleteProduct} from './module.js';
 import {cardProductInCart} from './module.js';
+import {cartCount} from './module.js'
 // APPEL API POUR TOUTES LES CAMERAS
 
 /* function camerasRequest() {
@@ -118,6 +119,8 @@ function cameraShop(obj) {
 }
 // CREATION CARDS PRODUITS DANS LE PANIER
 cardProductInCart();
+cartCount();
+
 
 
 

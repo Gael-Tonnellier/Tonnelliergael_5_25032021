@@ -45,5 +45,17 @@ export function deleteProduct(id) {
   cartOnStorage.splice(indexProduct, 1);
   localStorage.setItem("panier", JSON.stringify(cartOnStorage));
   document.getElementById(id).remove();
+  cartCount();
 } 
 window.deleteProduct=deleteProduct;
+
+export function cartCount(){
+  const totalProductInCart=[];
+const cartOnStorage = JSON.parse(localStorage.getItem("panier"));
+cartOnStorage.forEach ((product)=>{
+  totalProductInCart.push(product.totalProduct);
+});
+const sumTotalProductIncart= totalProductInCart.reduce((a, b) => a + b, 0);
+console.log(sumTotalProductIncart);
+document.getElementById('cartCount').innerHTML =sumTotalProductIncart;
+}

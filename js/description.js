@@ -1,5 +1,6 @@
 import {deleteProduct} from './module.js';
 import {cardProductInCart} from './module.js';
+import {cartCount} from './module.js';
 // APPEL API D'UNE SEULE CAMERA
 
 /* function cameraRequest(){
@@ -107,4 +108,5 @@ function addCart(camera) {
 }
 
 cardProductInCart();
+cartCount();
 
