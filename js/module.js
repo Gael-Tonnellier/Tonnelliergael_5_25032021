@@ -1,4 +1,4 @@
-function cardProductInCart() {
+export function cardProductInCart() {
   // RECUPERATION DU PANIER EN LOCALSTORAGE
   const cartOnStorage = JSON.parse(localStorage.getItem("panier"));
 
@@ -35,14 +35,15 @@ function cardProductInCart() {
     document.getElementById("panier").innerHTML += productCard;
   });
 }
-cardProductInCart();
+
 
 //SUPRESSION CARD EN PANIER HTML + LOCALSTORAGE
 
-function deleteProduct(product) {
+export function deleteProduct(id) {
   const cartOnStorage = JSON.parse(localStorage.getItem("panier"));
-  const indexProduct = cartOnStorage.findIndex((elem) => elem.id == product);
+  const indexProduct = cartOnStorage.findIndex((elem) => elem.id == id);
   cartOnStorage.splice(indexProduct, 1);
   localStorage.setItem("panier", JSON.stringify(cartOnStorage));
-  document.getElementById(product).remove();
-}
+  document.getElementById(id).remove();
+} 
+window.deleteProduct=deleteProduct;

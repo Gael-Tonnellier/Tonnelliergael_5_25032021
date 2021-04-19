@@ -1,3 +1,5 @@
+import {deleteProduct} from './module.js';
+
 // RECUPERATION DU PANIER EN LOCALSTORAGE
 const cartOnStorage = JSON.parse(localStorage.getItem("panier"));
 
@@ -35,13 +37,6 @@ function recapProduct() {
 }
 recapProduct();
 
-//SUPRESSION CARD EN PANIER HTML + LOCALSTORAGE
-function deleteProduct(product) {
-  const indexProduct = cartOnStorage.findIndex((elem) => elem.id == product);
-  cartOnStorage.splice(indexProduct, 1);
-  localStorage.setItem("panier", JSON.stringify(cartOnStorage));
-  document.getElementById(product).remove();
-}
 
 // FONCTIONNALITE QUI PERMET D'AFFICHER LE PRIX TOTAL
 function totalPrices() {
@@ -101,7 +96,7 @@ function sendForm() {
           })
             .then((response) => response.json())
             .then((order) => {
-              console.log(order);
+              //console.log(order);
               (localStorage.setItem("recap", JSON.stringify(order)));
               window.location.pathname = "./confirmation.html";
             })

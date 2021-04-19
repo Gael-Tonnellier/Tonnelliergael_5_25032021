@@ -1,3 +1,5 @@
+import {deleteProduct} from './module.js';
+import {cardProductInCart} from './module.js';
 // APPEL API POUR TOUTES LES CAMERAS
 
 /* function camerasRequest() {
@@ -7,11 +9,13 @@
   requestXHR.onreadystatechange = function () {
     if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
       const request = JSON.parse(this.responseText);
-
+      //console.log(request)
       // IMPORT DES FONCTIONS QUI UTILISE LE REQUEST
 
       cameraShop(request);
       carousel(request);
+    }else{
+      alert(Erreur dans la récupération des objets);
     }
   };
   requestXHR.open("GET", "http://localhost:3000/api/cameras/");
@@ -35,8 +39,9 @@ requestFetch();
 
 function carousel(camera) {
   // ORGANISATION DU TABLEAU DU PRIX LE MOINS ELEVE AU PLUS ELEVE
-
+  //console.log(camera)
   camera.sort((a, b) => a.price - b.price);
+  //console.log(camera)
 
   // PREMIER PRODUIT DU TABLEAU
   const cheaperProduct = `<div class="carousel-item active">
@@ -84,6 +89,7 @@ function carousel(camera) {
 
 function cameraShop(obj) {
   obj.forEach((cameras) => {
+    //console.log(cameras.name);
     const camerasContent = `<div class="card">
           <img src="${cameras.imageUrl}" class="card-img-top"alt= "Appareil ${
       cameras.name
@@ -110,53 +116,13 @@ function cameraShop(obj) {
     containerCard.appendChild(cameraCard);
   });
 }
-function cardProductInCart() {
-  // RECUPERATION DU PANIER EN LOCALSTORAGE
-  const cartOnStorage = JSON.parse(localStorage.getItem("panier"));
-
-  // CREATION CARD EN PANIER
-
-  cartOnStorage.forEach((product) => {
-    const productCard = `<div class="card mb-3" id="${
-      product.id
-    }" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-4 align-self-center">
-                    <img class="rounded border" src="${product.img}"  alt="${
-      product.name
-    }" style="max-width:100%">
-                </div>
-                <div class="col-6">
-                    <div class="card-body">
-                        <h5 class="card-title">${product.name}</h5>
-                        <p class="card-text">Prix: ${
-                          (product.price / 100) * product.totalProduct
-                        }€</p>
-                        <p class="card-text">Nombre d'article: ${
-                          product.totalProduct
-                        } </p>
-                    </div>
-                </div>
-                <div class="col-2 align-self-center">
-                    <button type="button" onClick="deleteProduct('${
-                      product.id
-                    }')" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                </div>
-            </div>
-        </div>`;
-    document.getElementById("panier").innerHTML += productCard;
-  });
-}
+// CREATION CARDS PRODUITS DANS LE PANIER
 cardProductInCart();
 
-//SUPRESSION CARD EN PANIER HTML + LOCALSTORAGE
 
-function deleteProduct(product) {
-  const cartOnStorage = JSON.parse(localStorage.getItem("panier"));
-  const indexProduct = cartOnStorage.findIndex((elem) => elem.id == product);
-  cartOnStorage.splice(indexProduct, 1);
-  localStorage.setItem("panier", JSON.stringify(cartOnStorage));
-  document.getElementById(product).remove();
-}
+
+
+
+
 
 
