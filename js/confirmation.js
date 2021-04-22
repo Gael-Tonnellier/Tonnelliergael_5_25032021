@@ -1,5 +1,5 @@
 //RECUPERATION REPONSE ENVOYE SUR LE LOCALSTORAGE
-const commandInfo=JSON.parse(localStorage.getItem('recap'));
+const commandInfo=JSON.parse(sessionStorage.getItem('recap'));
 
 // CALCUL PRIX TOTAL DE LA COMMANDE
 const totalPrice= commandInfo.products.reduce(function(sum,items) {
@@ -27,6 +27,7 @@ const buttonBack= document.getElementById('btn-back');
 
 // RESET DU LOCALSTORAGE ET REDIRECTION ACCUEIL 
 buttonBack.addEventListener("click",function(){
-    localStorage.clear();
+    sessionStorage.removeItem('panier');
+    sessionStorage.removeItem('recap');
     window.location.pathname = ('./index.html');
 })

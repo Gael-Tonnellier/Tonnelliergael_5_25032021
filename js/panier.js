@@ -1,7 +1,7 @@
 import {deleteProduct} from './module.js';
 
 // RECUPERATION DU PANIER EN LOCALSTORAGE
-const cartOnStorage = JSON.parse(localStorage.getItem("panier"));
+const cartOnStorage = JSON.parse(sessionStorage.getItem("panier"));
 
 // CREATION TABLEAU VIDE QUI SERVIRONT AU POST API ET PRIX TOTAL
 const allPrices = [];
@@ -97,7 +97,7 @@ function sendForm() {
             .then((response) => response.json())
             .then((order) => {
               //console.log(order);
-              (localStorage.setItem("recap", JSON.stringify(order)));
+              (sessionStorage.setItem("recap", JSON.stringify(order)));
               window.location.pathname = "./confirmation.html";
             })
             .catch(() => console.log("erreur d'API"));

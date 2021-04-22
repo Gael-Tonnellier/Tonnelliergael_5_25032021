@@ -26,9 +26,8 @@ cameraRequest(); */
 
 // REQUETE FETCH
 function requestFetch() {
-  // RECUPERATION DE L'ID PRODUIT VIA URL
   const id = document.location.search.substring(4);
-
+  // RECUPERATION DE L'ID PRODUIT VIA URL
   const request = fetch("http://localhost:3000/api/cameras/" + id)
     .then((response) => response.json())
     .then((camera) => {
@@ -36,7 +35,10 @@ function requestFetch() {
       cameraProduct(camera);
       addCart(camera);
     })
-    .catch(() => console.log("erreur d'API"));
+    .catch(() =>{
+      alert("Désolé nous ne trouvons pas votre produit, vous allez être redirigé");
+      window.location.pathname = ('./index.html');
+    });
 }
 requestFetch();
 
@@ -79,8 +81,8 @@ function cameraProduct(camera) {
 // FONCTIONALITE AJOUT AU PANIER
 function addCart(camera) {
   // CHECK SI UN PANIER EXISTE DEJA
-  const cart = JSON.parse(localStorage.getItem("panier"))
-    ? JSON.parse(localStorage.getItem("panier"))
+  const cart = JSON.parse(sessionStorage.getItem("panier"))
+    ? JSON.parse(sessionStorage.getItem("panier"))
     : [];
 
   let newProduct = {
@@ -98,10 +100,10 @@ function addCart(camera) {
     );
     if (productIsInCart != -1) {
       cart[productIsInCart].totalProduct += 1;
-      localStorage.setItem("panier", JSON.stringify(cart));
+      sessionStorage.setItem("panier", JSON.stringify(cart));
     } else {
       cart.push(newProduct);
-      localStorage.setItem("panier", JSON.stringify(cart));
+      sessionStorage.setItem("panier", JSON.stringify(cart));
     }
     document.location.reload();
   });
