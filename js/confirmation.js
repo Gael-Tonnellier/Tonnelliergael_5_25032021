@@ -29,5 +29,5 @@ const buttonBack= document.getElementById('btn-back');
 buttonBack.addEventListener("click",function(){
     sessionStorage.removeItem('panier');
     sessionStorage.removeItem('recap');
-    window.location.pathname = ('./index.html');
+    window.location.pathname = ('Tonnelliergael_5_25032021/index.html');
 })
