@@ -98,7 +98,7 @@ function sendForm() {
             .then((order) => {
               //console.log(order);
               (sessionStorage.setItem("recap", JSON.stringify(order)));
-              window.location.pathname = "./confirmation.html";
+              window.location.pathname = "Tonnelliergael_5_25032021/confirmation.html";
             })
             .catch(() => console.log("erreur d'API"));
         }
